@@ -1,11 +1,25 @@
 % x = [0 1 1 0];
-x = randi([0,1],[1,8])
+x = randi([0,1],[1,22])
 H = [0 0 0 1 1 1 1;
     0 1 1 0 0 1 1;
     1 0 1 0 1 0 1];
-[r,n] = size(H); 
-k = n - r; 
-G = [eye(k),[ones(3)-eye(3);ones(1,3)]]; 
+[rr,n] = size(H);
+k = n - rr;
+% c = zeros(1,r);
+ke = eye(k);
+G = [eye(k),zeros(k,rr)];
+for kk =1:k
+    for i=1:2^rr
+        obj=dec2bin(i,rr);
+        for q=1:rr
+            G(kk,k+q)=str2num(obj(q));
+        end
+        if mod(G(kk,:) * H',2) == 0
+            break; 
+        end
+    end
+end
+G
 if mod(G*H',2) ~=0
     fprintf("this code is not support for your H!")
 end
@@ -14,8 +28,8 @@ end
 %     0 0 1 0 1 1 0;
 %     0 0 0 1 1 1 1;];
 
-for k=1:2
-    x_ = x((k-1)*4+1:k*4)
+for kk=1:2
+    x_ = x((kk-1)*k+1:kk*k)
     e =eye(7);
     key = randi(7);
     e_ = e(key,:)
