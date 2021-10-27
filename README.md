@@ -4,7 +4,7 @@
 
 设二进制对称信道为
 $$
-P(Y/X)= \left[\begin{array}{cccc}
+P(Y/X)= \left[\begin{array}
 6/7 & 1/7 \\
 1/7 & 6/7   \\
 \end{array}\right]
